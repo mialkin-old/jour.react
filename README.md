@@ -38,5 +38,14 @@ docker push gcr.io/helical-patrol-307414/jour.react
 ## Running in GKE
 
 ```bash
-kubectl run jour-react --image=gcr.io/helical-patrol-307414/jour.react
+cd deploy
+kubectl kubectl apply -f deployment.yaml
 ```
+
+Make sure that the service is runnig:
+
+```bash
+kubectl port-forward --namespace mialkin svc/jour-react 8080:80
+```
+
+
