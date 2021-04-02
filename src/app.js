@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div className="App">
-     Jour is running!
+    <div>
+      <h1>Jour is up!</h1>
     </div>
   );
 }

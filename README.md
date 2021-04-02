@@ -27,11 +27,10 @@ gcloud auth configure-docker
 
 ```
 
-Tag and push:
+Build, tag and push:
 
 ```bash
-docker tag mialkin/jour.react gcr.io/helical-patrol-307414/jour.react
-
+docker build -t gcr.io/helical-patrol-307414/jour.react .
 docker push gcr.io/helical-patrol-307414/jour.react
 ```
 
@@ -48,4 +47,8 @@ Make sure that the service is runnig:
 kubectl port-forward --namespace mialkin svc/jour-react 8080:80
 ```
 
+## Updating image
 
+```bash
+kubectl rollout restart deployment jour-react
+```
