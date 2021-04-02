@@ -43,12 +43,12 @@ metadata:
   namespace: mialkin
 spec:
   hosts:
-  - "jour.mialkin.ru"
+    - "jour.mialkin.ru"
   gateways:
-  - mialkin-ru-gateway
+    - mialkin-ru-gateway
   http:
-  - route:
-    - destination:
-        host: jour-react
-        port:
-          number: 80
+    - route:
+        - destination:
+            host: jour-react
+            port:
+              number: 80
