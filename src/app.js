@@ -5,6 +5,11 @@ import Dashboard from './components/dashboard';
 import Loading from './components/loading';
 import Login from './components/login';
 
+const instance = axios.create({
+  withCredentials: true,
+  baseURL: 'https://localhost:5501/'
+})
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -30,11 +35,8 @@ export default class App extends React.Component {
 
   componentDidMount() {
 
-    axios.get(`https://localhost:5501/api/v1/login/status`)
-      .then(res => {
-        this.setState({
-          isAuthenticated: res.data
-        });
-      })
+    instance.get(`api/v1/login/status`)
+      .then(res => { this.setState({ isAuthenticated: res.data }); })
+
   }
 }
