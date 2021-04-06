@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://localhost:5501/'
+    baseURL: window.JOUR_BASE_URL
 })
 
 export default class Dashboard extends React.Component {
@@ -37,17 +37,7 @@ export default class Dashboard extends React.Component {
     handleSignOut() {
 
         instance
-            .post(`https://localhost:5501/api/v1/login/sign-out`)
-            .then(res => {
-
-                // if (res.data.success === true) {
-                //     alert(res.data.success)
-                // } else {
-                //     alert(res.data.errorMessage);
-                // }
-
-                // const token = res.data.token;
-                // window.location.href = '/';
-            });
+            .post(`login/sign-out`)
+            .then(res => { this.props.updateAuthStatus(false); });
     }
 }

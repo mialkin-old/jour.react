@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://localhost:5501/'
+    baseURL: window.JOUR_BASE_URL
 })
 
 export default class Login extends React.Component {
@@ -53,24 +53,18 @@ export default class Login extends React.Component {
 
     handleSignIn() {
 
-        //localStorage.setItem('jwt_token', 'sign in')
-        //window.location.href = '/';
-
         instance
-            .post(`https://localhost:5501/api/v1/login/sign-in`, {
+            .post(`login/sign-in`, {
                 username: this.state.username,
                 password: this.state.password
             })
             .then(res => {
 
                 if (res.data.success === true) {
-                    alert(res.data.success)
+                    this.props.updateAuthStatus(true);
                 } else {
                     alert(res.data.errorMessage);
                 }
-
-                // const token = res.data.token;
-                // window.location.href = '/';
             });
     }
 }

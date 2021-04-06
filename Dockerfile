@@ -14,3 +14,4 @@ RUN npm run build
 
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
+RUN echo "window.JOUR_BASE_URL = '/api/v1/';" > /usr/share/nginx/html/config.js

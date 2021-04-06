@@ -7,7 +7,7 @@ import Login from './components/login';
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'https://localhost:5501/'
+  baseURL: window.JOUR_BASE_URL
 })
 
 export default class App extends React.Component {
@@ -15,9 +15,17 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.updateAuthStatus = this.updateAuthStatus.bind(this)
+
     this.state = {
       isAuthenticated: undefined
     };
+  }
+
+  updateAuthStatus(status) {
+    this.setState({
+      isAuthenticated: status
+    });
   }
 
   render() {
@@ -27,15 +35,15 @@ export default class App extends React.Component {
     }
 
     if (this.state.isAuthenticated === true) {
-      return <Dashboard />
+      return <Dashboard updateAuthStatus={this.updateAuthStatus} />
     }
 
-    return <Login />
+    return <Login updateAuthStatus={this.updateAuthStatus} />
   }
 
   componentDidMount() {
 
-    instance.get(`api/v1/login/status`)
+    instance.get(`login/status`)
       .then(res => { this.setState({ isAuthenticated: res.data }); })
 
   }
