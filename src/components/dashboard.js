@@ -21,11 +21,11 @@ export default class Dashboard extends React.Component {
 
     render() {
         return (
-            <div>
-                "This is the dashboard"
+            <div>                
                 <div>
                     <button type="button" onClick={this.handleSignOut}>Выйти</button>
                 </div>
+                
             </div>
         )
     }
