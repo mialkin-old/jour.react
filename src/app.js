@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import Dashboard from './components/dashboard';
+import Home from './components/home';
 import Loading from './components/loading';
 import Login from './components/login';
 
@@ -35,7 +35,7 @@ export default class App extends React.Component {
     }
 
     if (this.state.isAuthenticated === true) {
-      return <Dashboard updateAuthStatus={this.updateAuthStatus} />
+      return <Home updateAuthStatus={this.updateAuthStatus} />
     }
 
     return <Login updateAuthStatus={this.updateAuthStatus} />
