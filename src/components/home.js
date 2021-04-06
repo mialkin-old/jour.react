@@ -11,6 +11,8 @@ import Dashboard from './dashboard/dashboard';
 import ToDo from './todo/todo'
 import Workout from './workout/workout'
 import PUA from './pua/pua'
+import Cooking from './cooking/cooking'
+import './home.css'
 
 const instance = axios.create({
     withCredentials: true,
@@ -33,14 +35,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <button type="button" onClick={this.handleSignOut}>Выйти</button>
-                </div>
                 <Router>
                     <div>
                         <ul>
                             <li>
-                                <Link to="/">Главная</Link>
+                                <Link to="/">Панель управления</Link>
                             </li>
                             <li>
                                 <Link to="/todo">Список дел</Link>
@@ -51,17 +50,16 @@ export default class Home extends React.Component {
                             <li>
                                 <Link to="/pua">PUA</Link>
                             </li>
+                            <li>
+                                <Link to="/cooking">Кулинария</Link>
+                            </li>
+                            <li>
+                                <button type="button" onClick={this.handleSignOut}>Выйти</button>
+                            </li>
                         </ul>
-
                         <hr />
-
-                                        {/*
-                        A <Switch> looks through all its children <Route>
-                        elements and renders the first one whose path
-                        matches the current URL. Use a <Switch> any time
-                        you have multiple routes, but you want only one
-                        of them to render at a time
-                        */}
+                    </div>
+                    <div>
                         <Switch>
                             <Route exact path="/">
                                 <Dashboard />
@@ -74,6 +72,9 @@ export default class Home extends React.Component {
                             </Route>
                             <Route path="/pua">
                                 <PUA />
+                            </Route>
+                            <Route path="/cooking">
+                                <Cooking />
                             </Route>
                         </Switch>
                     </div>
@@ -90,6 +91,6 @@ export default class Home extends React.Component {
 
         instance
             .post(`login/sign-out`)
-            .then(res => { this.props.updateAuthStatus(false); });
+            .then(res => { window.location.href = '/'; });
     }
 }
