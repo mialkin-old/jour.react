@@ -1,0 +1,7 @@
+.birthdays .day {
+    font-size: 20px;
+}
+
+.birthdays .inactive {
+    opacity: 0.5;
+}

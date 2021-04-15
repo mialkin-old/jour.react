@@ -12,6 +12,7 @@ import ToDo from './todo/todo'
 import Workout from './workout/workout'
 import PUA from './pua/pua'
 import Cooking from './cooking/cooking'
+import Birthday from './birthday/birthday'
 import './home.css'
 
 const instance = axios.create({
@@ -36,7 +37,7 @@ export default class Home extends React.Component {
         return (
             <div>
                 <Router>
-                    <div>
+                    <div className="navbar">
                         <ul>
                             <li>
                                 <Link to="/">Панель управления</Link>
@@ -52,6 +53,9 @@ export default class Home extends React.Component {
                             </li>
                             <li>
                                 <Link to="/cooking">Кулинария</Link>
+                            </li>
+                            <li>
+                                <Link to="/birthday">Дни рождения</Link>
                             </li>
                             <li>
                                 <button type="button" onClick={this.handleSignOut}>Выйти</button>
@@ -75,6 +79,9 @@ export default class Home extends React.Component {
                             </Route>
                             <Route path="/cooking">
                                 <Cooking />
+                            </Route>
+                            <Route path="/birthday">
+                                <Birthday />
                             </Route>
                         </Switch>
                     </div>
