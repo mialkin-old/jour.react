@@ -33,9 +33,6 @@ export default class Birthday extends React.Component {
                             }</div>
 
                         </div>
-                        // <div key={post.id}>
-                        //    <span>{post.day}</span> {post.firstName} {post.lastName}
-                        // </div>
                     )}
                 </div>
             </div>
