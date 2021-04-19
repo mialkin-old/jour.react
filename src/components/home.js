@@ -9,6 +9,7 @@ import axios from 'axios';
 
 import Dashboard from './dashboard/dashboard';
 import ToDo from './todo/todo'
+import Goals from './goals/goals'
 import Workout from './workout/workout'
 import PUA from './pua/pua'
 import Cooking from './cooking/cooking'
@@ -46,6 +47,9 @@ export default class Home extends React.Component {
                                 <Link to="/todo">Список дел</Link>
                             </li>
                             <li>
+                                <Link to="/goals">Цели</Link>
+                            </li>
+                            <li>
                                 <Link to="/workout">Тренировки</Link>
                             </li>
                             <li>
@@ -70,6 +74,9 @@ export default class Home extends React.Component {
                             </Route>
                             <Route path="/todo">
                                 <ToDo />
+                            </Route>
+                            <Route path="/goals">
+                                <Goals />
                             </Route>
                             <Route path="/workout">
                                 <Workout />
