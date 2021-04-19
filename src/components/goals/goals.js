@@ -19,8 +19,6 @@ export default class Goals extends React.Component {
 
     render() {
 
-
-
         return (
             <div>
                 Цели
@@ -29,18 +27,14 @@ export default class Goals extends React.Component {
                         <tr>
                             <th>Название</th>
                             <th>Дата создания</th>
-                            <th>Крайний сроки</th>
                             <th>Метки</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.goals.map((goal) =>
-
                             <tr key={goal.goalId}>
                                 <td>{goal.title}</td>
                                 <td>{formatDate(goal.dateCreated)}</td>
-                                <td>{goal.deadLine}</td>
-                                <td></td>
                             </tr>
                         )}
                     </tbody>
