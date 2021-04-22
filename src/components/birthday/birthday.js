@@ -24,7 +24,7 @@ export default class Birthday extends React.Component {
                 Дни рождения
                 <div>
                     {this.state.birthdays.map((month) =>
-                        <div className={month.hasActive ? 'active' : 'inactive'}>
+                        <div className={month.hasActiveBirthdays ? 'active' : 'inactive'}>
                             <h2>{month.monthText}</h2>
                             <div>{month.birthdays.map((bd) =>
                                 <div className={bd.isActive ? 'active' : 'inactive'}>
