@@ -43,7 +43,7 @@ export default class ToDo extends React.Component {
                     <div>
                         {this.state.active.map((toDo) =>
                             <div key={toDo.toDoId}>
-                                {toDo.title} <button>↓ завершить</button><button>удалить</button>
+                                {toDo.title} <button onClick={() => this.handleComplete(toDo.toDoId)}>↓ завершить</button><button onClick={() => this.handleDelete(toDo.toDoId, toDo.title, true)}>удалить</button>
                             </div>
                         )}
                     </div>
@@ -53,8 +53,8 @@ export default class ToDo extends React.Component {
                     <div>
                         {this.state.inactive.map((toDo) =>
                             <div key={toDo.toDoId}>
-                                {toDo.title} <button>↑ активировать</button>
-                                <button onClick={() => this.handleDelete(toDo.toDoId)}>удалить</button>
+                                {toDo.title} <button onClick={() => this.handleUncomplete(toDo.toDoId)}>↑ активировать</button>
+                                <button onClick={() => this.handleDelete(toDo.toDoId, toDo.title, false)}>удалить</button>
                             </div>
                         )}
                     </div>
@@ -65,6 +65,10 @@ export default class ToDo extends React.Component {
 
     componentDidMount() {
 
+        this.loadAll();
+    }
+
+    loadAll() {
         this.loadActive();
         this.loadInactive();
     }
@@ -94,21 +98,47 @@ export default class ToDo extends React.Component {
                 instance.get(`todo/active`)
                     .then(res => {
                         this.setState({
-                            toDos: res.data,
+                            active: res.data,
                             title: ''
                         });
                     })
             });
     }
 
-    handleDelete(id) {
+    handleDelete(id, title, isActive) {
 
+        if (window.confirm(`Удалить "${title}" ?`)) {
+            instance
+                .post(`todo/delete`, {
+                    id: id
+                })
+                .then(res => {
+                    if (isActive) {
+                        this.loadActive();
+                    } else {
+                        this.loadInactive();
+                    }
+                });
+        }
+    }
+
+    handleComplete(id) {
         instance
-            .post(`todo/delete`, {
+            .post(`todo/complete`, {
                 id: id
             })
             .then(res => {
-                this.load();
+                this.loadAll();
+            });
+    }
+
+    handleUncomplete(id) {
+        instance
+            .post(`todo/uncomplete`, {
+                id: id
+            })
+            .then(res => {
+                this.loadAll();
             });
     }
 }

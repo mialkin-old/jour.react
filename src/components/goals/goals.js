@@ -26,7 +26,7 @@ export default class Goals extends React.Component {
 
         return (
             <div>
-                <h1>Цели</h1>
+                <h1>Планы</h1>
                 <div>
                     <div style={{ margin: '0 0 20px 0' }}>
                         <input
@@ -82,13 +82,13 @@ export default class Goals extends React.Component {
                 title: this.state.title
             })
             .then(res => {
-                instance.get(`goal/list`)
-                    .then(res => {
-                        this.setState({
-                            goals: res.data,
-                            title: ''
-                        });
-                    })
+
+                this.setState({
+                    title: ''
+                });
+
+                this.load();
+
             });
     }
 
