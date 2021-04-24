@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import TagsDropdown from '../tags/tagsdropdown'
+import '../tags/tag.css'
 
 const instance = axios.create({
     withCredentials: true,
@@ -46,9 +47,14 @@ export default class ToDo extends React.Component {
                 <div>
                     <h2>Активные</h2>
                     <div>
-                        {this.state.active.map((toDo) =>
-                            <div key={toDo.toDoId}>
-                                {toDo.title} <button onClick={() => this.handleComplete(toDo.toDoId)}>↓ завершить</button><button onClick={() => this.handleDelete(toDo.toDoId, toDo.title, true)}>удалить</button>
+                        {this.state.active.map((todo) =>
+                            <div key={todo.todoId}>
+                                {todo.title}
+                                {todo.tags.map((tag) =>
+                                    <span key={tag.tagId} className="tag">{tag.title}</span>
+                                )}
+                                <button onClick={() => this.handleComplete(todo.todoId)}>↓ завершить</button>
+                                <button onClick={() => this.handleDelete(todo.todoId, todo.title, true)}>удалить</button>
                             </div>
                         )}
                     </div>
@@ -56,10 +62,11 @@ export default class ToDo extends React.Component {
                 <div>
                     <h2>Завершенные</h2>
                     <div>
-                        {this.state.inactive.map((toDo) =>
-                            <div key={toDo.toDoId}>
-                                {toDo.title} <button onClick={() => this.handleUncomplete(toDo.toDoId)}>↑ активировать</button>
-                                <button onClick={() => this.handleDelete(toDo.toDoId, toDo.title, false)}>удалить</button>
+                        {this.state.inactive.map((todo) =>
+                            <div key={todo.todoId}>
+                                {todo.title}
+                                <button onClick={() => this.handleUncomplete(todo.todoId)}>↑ активировать</button>
+                                <button onClick={() => this.handleDelete(todo.todoId, todo.title, false)}>удалить</button>
                             </div>
                         )}
                     </div>
@@ -69,7 +76,6 @@ export default class ToDo extends React.Component {
     }
 
     componentDidMount() {
-
         this.loadAll();
     }
 
@@ -105,8 +111,7 @@ export default class ToDo extends React.Component {
                     .then(res => {
                         this.setState({
                             active: res.data,
-                            title: '',
-                            tagId: 0
+                            title: ''
                         });
                     })
             });
