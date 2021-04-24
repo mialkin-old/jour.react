@@ -12,7 +12,8 @@ export default class ToDo extends React.Component {
         super(props);
 
         this.state = {
-            toDos: [],
+            active: [],
+            inactive: [],
             title: ''
         };
 
@@ -40,7 +41,7 @@ export default class ToDo extends React.Component {
                 <div>
                     <h2>Активные</h2>
                     <div>
-                        {this.state.toDos.map((toDo) =>
+                        {this.state.active.map((toDo) =>
                             <div key={toDo.toDoId}>
                                 {toDo.title} <button>↓ завершить</button><button>удалить</button>
                             </div>
@@ -50,7 +51,7 @@ export default class ToDo extends React.Component {
                 <div>
                     <h2>Завершенные</h2>
                     <div>
-                        {this.state.toDos.map((toDo) =>
+                        {this.state.inactive.map((toDo) =>
                             <div key={toDo.toDoId}>
                                 {toDo.title} <button>↑ активировать</button>
                                 <button onClick={() => this.handleDelete(toDo.toDoId)}>удалить</button>
@@ -64,12 +65,18 @@ export default class ToDo extends React.Component {
 
     componentDidMount() {
 
-        this.load();
+        this.loadActive();
+        this.loadInactive();
     }
 
-    load() {
-        instance.get(`todo/list`)
-            .then(res => { this.setState({ toDos: res.data }); })
+    loadActive() {
+        instance.get(`todo/active`)
+            .then(res => { this.setState({ active: res.data }); })
+    }
+
+    loadInactive() {
+        instance.get(`todo/inactive`)
+            .then(res => { this.setState({ inactive: res.data }); })
     }
 
     handleChange({ target }) {
@@ -84,33 +91,24 @@ export default class ToDo extends React.Component {
                 title: this.state.title
             })
             .then(res => {
-                if (res.data.success === true) {
-                    instance.get(`todo/list`)
-                        .then(res => {
-                            this.setState({
-                                toDos: res.data,
-                                title: ''
-                            });
-                        })
-                } else {
-                    alert("Error!");
-                }
+                instance.get(`todo/active`)
+                    .then(res => {
+                        this.setState({
+                            toDos: res.data,
+                            title: ''
+                        });
+                    })
             });
     }
 
     handleDelete(id) {
-        
+
         instance
             .post(`todo/delete`, {
                 id: id
             })
             .then(res => {
-                if (res.data.success === true) {
-
-                    this.load();
-                } else {
-                    alert("Error!");
-                }
+                this.load();
             });
     }
 }

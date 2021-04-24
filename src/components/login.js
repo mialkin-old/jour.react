@@ -59,12 +59,7 @@ export default class Login extends React.Component {
                 password: this.state.password
             })
             .then(res => {
-
-                if (res.data.success === true) {
-                    this.props.updateAuthStatus(true);
-                } else {
-                    alert(res.data.errorMessage);
-                }
+                this.props.updateAuthStatus(true);
             });
     }
 }

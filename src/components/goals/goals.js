@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import {formatDate} from './../helpers';
+import { formatDate } from './../helpers';
 
 const instance = axios.create({
     withCredentials: true,
@@ -13,15 +13,31 @@ export default class Goals extends React.Component {
         super(props);
 
         this.state = {
-            goals: []
+            goals: [],
+            title: ''
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleCreate = this.handleCreate.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     render() {
 
         return (
             <div>
-                Цели
+                <h1>Цели</h1>
+                <div>
+                    <div style={{ margin: '0 0 20px 0' }}>
+                        <input
+                            style={{ width: 200 }}
+                            name="title"
+                            value={this.state.title}
+                            onChange={this.handleChange} />
+
+                        <button onClick={this.handleCreate}>Планы</button>
+                    </div>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -45,8 +61,44 @@ export default class Goals extends React.Component {
 
     componentDidMount() {
 
+        this.load();
+
+    }
+
+    load() {
         instance.get(`goal/list`)
             .then(res => { this.setState({ goals: res.data }); })
+    }
 
+    handleChange({ target }) {
+        this.setState({
+            [target.name]: target.value
+        });
+    }
+
+    handleCreate() {
+        instance
+            .post(`goal/create`, {
+                title: this.state.title
+            })
+            .then(res => {
+                instance.get(`goal/list`)
+                    .then(res => {
+                        this.setState({
+                            goals: res.data,
+                            title: ''
+                        });
+                    })
+            });
+    }
+
+    handleDelete(id) {
+        instance
+            .post(`goal/delete`, {
+                id: id
+            })
+            .then(res => {
+                this.load();
+            });
     }
 }

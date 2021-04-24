@@ -44,16 +44,13 @@ export default class Home extends React.Component {
                                 <Link to="/">Панель управления</Link>
                             </li>
                             <li>
-                                <Link to="/todo">Список дел</Link>
-                            </li>
-                            <li>
-                                <Link to="/goals">Цели</Link>
+                                <Link to="/todo">Текущие дела</Link>
                             </li>
                             <li>
                                 <Link to="/workout">Тренировки</Link>
                             </li>
                             <li>
-                                <Link to="/pua">PUA</Link>
+                                <Link to="/goals">Планы</Link>
                             </li>
                             <li>
                                 <Link to="/cooking">Кулинария</Link>
@@ -75,14 +72,11 @@ export default class Home extends React.Component {
                             <Route path="/todo">
                                 <ToDo />
                             </Route>
-                            <Route path="/goals">
-                                <Goals />
-                            </Route>
                             <Route path="/workout">
                                 <Workout />
                             </Route>
-                            <Route path="/pua">
-                                <PUA />
+                            <Route path="/goals">
+                                <Goals />
                             </Route>
                             <Route path="/cooking">
                                 <Cooking />
