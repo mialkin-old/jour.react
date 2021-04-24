@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import TagsDropdown from '../tags/tagsdropdown'
 
 const instance = axios.create({
     withCredentials: true,
@@ -14,12 +15,14 @@ export default class ToDo extends React.Component {
         this.state = {
             active: [],
             inactive: [],
-            title: ''
+            title: '',
+            tagId: 0
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.updateTag = this.updateTag.bind(this);
     }
 
     render() {
@@ -34,6 +37,8 @@ export default class ToDo extends React.Component {
                             name="title"
                             value={this.state.title}
                             onChange={this.handleChange} />
+
+                        <TagsDropdown updateTag={this.updateTag} />
 
                         <button onClick={this.handleCreate}>Добавить</button>
                     </div>
@@ -92,14 +97,16 @@ export default class ToDo extends React.Component {
     handleCreate() {
         instance
             .post(`todo/create`, {
-                title: this.state.title
+                title: this.state.title,
+                tagId: this.state.tagId
             })
             .then(res => {
                 instance.get(`todo/active`)
                     .then(res => {
                         this.setState({
                             active: res.data,
-                            title: ''
+                            title: '',
+                            tagId: 0
                         });
                     })
             });
@@ -140,5 +147,11 @@ export default class ToDo extends React.Component {
             .then(res => {
                 this.loadAll();
             });
+    }
+
+    updateTag(id) {
+        this.setState({
+            tagId: id
+        })
     }
 }

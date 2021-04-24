@@ -11,7 +11,6 @@ import Dashboard from './dashboard/dashboard';
 import ToDo from './todo/todo'
 import Goals from './goals/goals'
 import Workout from './workout/workout'
-import PUA from './pua/pua'
 import Cooking from './cooking/cooking'
 import Birthday from './birthday/birthday'
 import './home.css'

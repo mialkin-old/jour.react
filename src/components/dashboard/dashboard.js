@@ -1,5 +1,5 @@
 import React from 'react'
-import Tags from './tag';
+import Tags from '../tags/tags';
 
 export default class Dashboard extends React.Component {
 
