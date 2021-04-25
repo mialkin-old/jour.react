@@ -1,0 +1,25 @@
+.todo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.todo .active {
+    grid-column: 1 / 2;
+    grid-row: 2;
+}
+
+.todo .inactive {
+    grid-column: 1 / 2;
+    grid-row: 3;
+}
+
+
+.todo .short {
+    grid-column: 2 / 3;
+    grid-row: 2;
+}
+
+.todo .long {
+    grid-column: 2 / 3;
+    grid-row: 3;
+}

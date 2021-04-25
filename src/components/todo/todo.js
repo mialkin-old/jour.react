@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
-import TagsDropdown from '../tags/tagsdropdown'
-import '../tags/tag.css'
+import TagsDropdown from '../tags/tagsdropdown';
+import './todo.css';
+import '../tags/tag.css';
 
 const instance = axios.create({
     withCredentials: true,
@@ -29,22 +30,24 @@ export default class ToDo extends React.Component {
     render() {
 
         return (
-            <div>
-                <h1>Список дел</h1>
-                <div>
-                    <div style={{ margin: '0 0 20px 0' }}>
-                        <input
-                            style={{ width: 200 }}
-                            name="title"
-                            value={this.state.title}
-                            onChange={this.handleChange} />
+            <div className="todo">
+                <div className="create">
+                    <h1>Список дел</h1>
+                    <div>
+                        <div style={{ margin: '0 0 20px 0' }}>
+                            <input
+                                style={{ width: 200 }}
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.handleChange} />
 
-                        <TagsDropdown updateTag={this.updateTag} />
+                            <TagsDropdown updateTag={this.updateTag} />
 
-                        <button onClick={this.handleCreate}>Добавить</button>
+                            <button onClick={this.handleCreate}>Добавить</button>
+                        </div>
                     </div>
                 </div>
-                <div>
+                <div className="active">
                     <h2>Активные</h2>
                     <div>
                         {this.state.active.map((todo) =>
@@ -59,7 +62,7 @@ export default class ToDo extends React.Component {
                         )}
                     </div>
                 </div>
-                <div>
+                <div className="inactive">
                     <h2>Завершенные</h2>
                     <div>
                         {this.state.inactive.map((todo) =>
@@ -70,6 +73,18 @@ export default class ToDo extends React.Component {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className="short">
+                    <h2>Короткие</h2>
+                    <div>
+                        asdfasdf asdf
+                        asdf
+                        as
+         
+                    </div>
+                </div>
+                <div className="long">
+                    <h2>Долгие</h2>
                 </div>
             </div>
         )
