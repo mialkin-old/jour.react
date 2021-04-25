@@ -23,6 +23,8 @@ export default class ToDo extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleHoursChange = this.handleHoursChange.bind(this);
+        this.handleMinutesChange = this.handleMinutesChange.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.updateTag = this.updateTag.bind(this);
@@ -53,11 +55,11 @@ export default class ToDo extends React.Component {
                         {this.state.active.map((todo) =>
                             <div key={todo.todoId}>
                                 {todo.title}
-                                <TodoDuration />                                
+                                <TodoDuration {...todo.duration} todoId={todo.todoId} handleHoursChange={this.handleHoursChange} handleMinutesChange={this.handleMinutesChange} />                                
                                 {todo.tags.map((tag) =>
                                     <span key={tag.tagId} className="tag">{tag.title}</span>
                                 )}
-                                <button onClick={() => this.handleComplete(todo.todoId)}>↓ завершить</button>
+                                <button onClick={() => this.handleComplete(todo.todoId, todo.duration.hours, todo.duration.minutes)}>↓ завершить</button>
                                 <button onClick={() => this.handleDelete(todo.todoId, todo.title, true)}>удалить</button>
                             </div>
                         )}
@@ -69,6 +71,7 @@ export default class ToDo extends React.Component {
                         {this.state.inactive.map((todo) =>
                             <div key={todo.todoId}>
                                 {todo.title}
+                                <span>{todo.duration.hours}:{todo.duration.minutes}</span>
                                 <button onClick={() => this.handleUncomplete(todo.todoId)}>↑ активировать</button>
                                 <button onClick={() => this.handleDelete(todo.todoId, todo.title, false)}>удалить</button>
                             </div>
@@ -150,10 +153,15 @@ export default class ToDo extends React.Component {
         }
     }
 
-    handleComplete(id) {
+    handleComplete(id, hours, minutes) {
+
         instance
             .post(`todo/complete`, {
-                id: id
+                id: id,
+                duration: {
+                    hours: hours,
+                    minutes: minutes
+                }
             })
             .then(res => {
                 this.loadAll();
@@ -168,6 +176,38 @@ export default class ToDo extends React.Component {
             .then(res => {
                 this.loadAll();
             });
+    }
+
+    handleHoursChange(id, hours) {
+
+        let items = [...this.state.active];
+        let index = this.state.active.findIndex(x => x.todoId === id);
+
+        let todo = {...items[index]};
+        todo.duration.hours = hours;
+
+        items[index] = todo;
+
+        this.setState({
+            active: items
+        })
+
+    }
+
+    handleMinutesChange(id, minutes) {
+       
+        let items = [...this.state.active];
+        let index = this.state.active.findIndex(x => x.todoId === id);
+
+        let todo = {...items[index]};
+        todo.duration.minutes = minutes;
+
+        items[index] = todo;
+
+        this.setState({
+            active: items
+        })
+
     }
 
     updateTag(id) {

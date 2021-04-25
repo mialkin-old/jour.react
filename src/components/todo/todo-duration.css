@@ -3,7 +3,7 @@
 }
 
 .todo .todo-duration .input-hours, .input-minutes {
-    width: 15px;
-    margin-right: 5px;
-    margin-right: 5px;
+    width: 30px;
+    margin-left: 7px;
+    margin-right: 3px;
 }
