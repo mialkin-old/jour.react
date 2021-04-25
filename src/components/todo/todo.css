@@ -3,6 +3,10 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.todo .header {
+    grid-row: 1;
+}
+
 .todo .active {
     grid-column: 1 / 2;
     grid-row: 2;

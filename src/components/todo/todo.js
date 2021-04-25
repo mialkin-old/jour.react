@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import TagsDropdown from '../tags/tagsdropdown';
+import TagsDropdown from '../tags/tags-dropdown';
+import TodoDuration from './todo-duration'
 import './todo.css';
 import '../tags/tag.css';
 
@@ -31,18 +32,17 @@ export default class ToDo extends React.Component {
 
         return (
             <div className="todo">
-                <div className="create">
+                <div className="header">
                     <h1>Список дел</h1>
                     <div>
                         <div style={{ margin: '0 0 20px 0' }}>
                             <input
-                                style={{ width: 200 }}
+                                style={{ width: 500 }}
                                 name="title"
                                 value={this.state.title}
                                 onChange={this.handleChange} />
 
                             <TagsDropdown updateTag={this.updateTag} />
-
                             <button onClick={this.handleCreate}>Добавить</button>
                         </div>
                     </div>
@@ -53,6 +53,7 @@ export default class ToDo extends React.Component {
                         {this.state.active.map((todo) =>
                             <div key={todo.todoId}>
                                 {todo.title}
+                                <TodoDuration />                                
                                 {todo.tags.map((tag) =>
                                     <span key={tag.tagId} className="tag">{tag.title}</span>
                                 )}

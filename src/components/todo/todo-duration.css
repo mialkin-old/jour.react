@@ -1,0 +1,9 @@
+.todo .todo-duration {
+    padding: 0 10px 0 10px;
+}
+
+.todo .todo-duration .input-hours, .input-minutes {
+    width: 15px;
+    margin-right: 5px;
+    margin-right: 5px;
+}
