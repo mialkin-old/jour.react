@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import { formatDate } from './../helpers';
 
 const instance = axios.create({
     withCredentials: true,
