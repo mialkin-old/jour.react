@@ -72,7 +72,7 @@ export default class Tags extends React.Component {
                 instance.get(`tag/list`)
                     .then(res => {
                         this.setState({
-                            toDos: res.data,
+                            tags: res.data,
                             title: ''
                         });
                     })
