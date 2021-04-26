@@ -31,7 +31,6 @@ export default class Birthday extends React.Component {
                                     <span className="day">{bd.day}</span> {bd.firstName} {bd.lastName}
                                 </div>)
                             }</div>
-
                         </div>
                     )}
                 </div>

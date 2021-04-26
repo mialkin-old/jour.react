@@ -35,22 +35,19 @@ export default class Goals extends React.Component {
                             value={this.state.title}
                             onChange={this.handleChange} />
 
-                        <button onClick={this.handleCreate}>Планы</button>
+                        <button onClick={this.handleCreate}>Добавить</button>
                     </div>
                 </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Название</th>
-                            <th>Дата создания</th>
-                            <th>Метки</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.goals.map((goal) =>
                             <tr key={goal.goalId}>
                                 <td>{goal.title}</td>
-                                <td>{formatDate(goal.dateCreated)}</td>
                             </tr>
                         )}
                     </tbody>
