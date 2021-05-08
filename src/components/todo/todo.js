@@ -81,9 +81,6 @@ export default class ToDo extends React.Component {
                 <div className="short">
                     <h2>Короткие</h2>
                     <div>
-                        asdfasdf asdf
-                        asdf
-                        as
          
                     </div>
                 </div>

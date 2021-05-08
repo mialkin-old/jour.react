@@ -11,7 +11,6 @@ import Dashboard from './dashboard/dashboard';
 import ToDo from './todo/todo'
 import Goals from './goals/goals'
 import Workout from './workout/workout'
-import Cooking from './cooking/cooking'
 import Birthday from './birthday/birthday'
 import './home.css'
 
@@ -52,9 +51,6 @@ export default class Home extends React.Component {
                                 <Link to="/goals">Планы</Link>
                             </li>
                             <li>
-                                <Link to="/cooking">Кулинария</Link>
-                            </li>
-                            <li>
                                 <Link to="/birthday">Дни рождения</Link>
                             </li>
                             <li>
@@ -76,9 +72,6 @@ export default class Home extends React.Component {
                             </Route>
                             <Route path="/goals">
                                 <Goals />
-                            </Route>
-                            <Route path="/cooking">
-                                <Cooking />
                             </Route>
                             <Route path="/birthday">
                                 <Birthday />

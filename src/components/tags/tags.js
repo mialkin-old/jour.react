@@ -47,7 +47,6 @@ export default class Tags extends React.Component {
         )
     }
 
-
     componentDidMount() {
         this.load();
     }
