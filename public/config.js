@@ -1,1 +1,1 @@
-window.JOUR_BASE_URL = 'http://localhost:5500/api/v1/';
+window.JOUR_BASE_URL = 'https://localhost:5501/api/v1/';
