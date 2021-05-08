@@ -24,7 +24,6 @@ Auth to GCP first:
 gcloud config set project helical-patrol-307414
 gcloud auth login
 gcloud auth configure-docker
-
 ```
 
 Build, tag and push:
